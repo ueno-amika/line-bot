@@ -119,3 +119,11 @@ ngrok http 3000
 ## デプロイ
 
 Vercel に接続してデプロイ後、LINE Developers コンソールの Webhook URL を本番 URL（`https://<your-app>.vercel.app/api/line/webhook`）に更新してください。
+
+## ドキュメント
+
+| ドキュメント | 対象 | 内容 |
+|---|---|---|
+| [SETUP.md](./SETUP.md) | エンジニア | 開発環境構築・デプロイ手順 |
+| [OPERATIONS_GUIDE.md](./OPERATIONS_GUIDE.md) | オーナー | FAQ追加・お知らせ配信・Botの返答対処（スマホ向け） |
+| [TECHNICAL_DOCS.md](./TECHNICAL_DOCS.md) | エンジニア | API仕様・DB設計・連携図・既知の課題 |
