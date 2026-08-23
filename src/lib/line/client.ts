@@ -8,7 +8,7 @@ import { ReplyMessageRequest, Message } from './types';
 export class LineClient {
   private channelAccessToken: string;
   private channelSecret: string;
-  private baseUrl = 'https://api.line.biz/v2';
+  private baseUrl = 'https://api.line.me/v2';
 
   constructor(channelAccessToken: string, channelSecret: string) {
     this.channelAccessToken = channelAccessToken;
@@ -24,7 +24,18 @@ export class LineClient {
       .createHmac('sha256', this.channelSecret)
       .update(body)
       .digest('base64');
-    return hash === signature;
+
+    const hashBuffer = Buffer.from(hash);
+    const signatureBuffer = Buffer.from(signature);
+
+    // 長さが違うと timingSafeEqual が例外を投げるため、先に弾く
+    // （長さの違い自体は攻撃者に有用な情報を与えないため問題ない）
+    if (hashBuffer.length !== signatureBuffer.length) {
+      return false;
+    }
+
+    // タイミング攻撃対策として、文字列の早期不一致で処理時間が変わらない比較を使う
+    return crypto.timingSafeEqual(hashBuffer, signatureBuffer);
   }
 
   /**
@@ -67,6 +78,26 @@ export class LineClient {
         Authorization: `Bearer ${this.channelAccessToken}`,
       },
       body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(`LINE API Error: ${JSON.stringify(error)}`);
+    }
+  }
+
+  /**
+   * 友だち全員に一斉配信（Broadcast API）
+   * LINE 公式アカウントを友だち追加している全員にメッセージを送る
+   */
+  async broadcastMessage(messages: Message[]): Promise<void> {
+    const response = await fetch(`${this.baseUrl}/bot/message/broadcast`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.channelAccessToken}`,
+      },
+      body: JSON.stringify({ messages }),
     });
 
     if (!response.ok) {
