@@ -8,11 +8,11 @@ LINE Messaging API と Claude API を組み合わせた FAQ 自動応答 Bot。�
 
 | ユーザーとの会話（LINE） | 管理画面トップ |
 |---|---|
-| _(スクリーンショットを追加予定)_ | _(スクリーンショットを追加予定)_ |
+| <img width="1060" height="724" alt="スクリーンショット 2026-08-23 14 30 00" src="https://github.com/user-attachments/assets/1b3b235a-c46a-4b8d-adc0-7136babcd514" /> | <img width="1183" height="455" alt="スクリーンショット 2026-08-23 14 30 20" src="https://github.com/user-attachments/assets/7dd90f11-e2e7-4cec-90f2-7eb1102475cb" /> |
 
 | FAQ 管理 | 会話ログ |
 |---|---|
-| _(スクリーンショットを追加予定)_ | _(スクリーンショットを追加予定)_ |
+| <img width="1182" height="705" alt="スクリーンショット 2026-08-23 14 30 37" src="https://github.com/user-attachments/assets/0baef805-1b60-4ac1-92cd-7de5c680f6ff" /> | <img width="1187" height="458" alt="スクリーンショット 2026-08-23 14 53 00" src="https://github.com/user-attachments/assets/bcedff7d-4cdb-4f6d-9067-86a339526827" /> |
 
 ## 主な機能
 
